@@ -51,7 +51,7 @@ To get started, you will need the following credentials as environment variables
 ## File Structure
 
 ### Docker Image
-
+```
 ── Dockerfile
 ├── case_scraper
 │   ├── app-main.py
@@ -88,10 +88,10 @@ To get started, you will need the following credentials as environment variables
 │   └── spiders
 ├── entrypoint.sh
 └── requirements.txt
-
+```
 ### GitHub Repo
 
-
+```
 └── spiders
     ├── __init__.py
     ├── county
@@ -101,3 +101,5 @@ To get started, you will need the following credentials as environment variables
     ├── extensions
     │   ├── MyExtension_300.py
     └── requirements.txt
+    
+```
