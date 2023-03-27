@@ -54,49 +54,50 @@ To get started, you will need the following credentials as environment variables
 
 ── Dockerfile
 ├── case_scraper
-│ ├── app-main.py
-│ ├── app.py
-│ ├── public_digital
-│ │ ├── init.py
-│ │ ├── data_exchange
-│ │ │ └── public_digital_interface.py
-│ │ ├── dataclasses
-│ │ │ └── base_dataclasses.py
-│ │ ├── extensions
-│ │ │ └── base_extensions.py
-│ │ ├── items
-│ │ │ └── base_case_items.py
-│ │ ├── middlewares
-│ │ │ ├── base_middlewares.py
-│ │ │ └── proxy.py
-│ │ ├── pipelines
-│ │ │ └── base_pipelines.py
-│ │ ├── protocols
-│ │ │ └── base_protocols.py
-│ │ ├── spiders
-│ │ │ ├── BaseScraper.py
-│ │ │ ├── init.py
-│ │ └── utils
-│ │ ├── decorators.py
-│ │ ├── funcs.py
-│ │ ├── logging.py
-│ │ ├── proxies.py
-│ │ └── save_case.py
-│ ├── README.md
-│ ├── scrapy.cfg
-│ ├── settings.py
-│ └── spiders
+│   ├── app-main.py
+│   ├── app.py
+│   ├── public_digital
+│   │   ├── __init__.py
+│   │   ├── data_exchange
+│   │   │   └── public_digital_interface.py
+│   │   ├── dataclasses
+│   │   │   └── base_dataclasses.py
+│   │   ├── extensions
+│   │   │   └── base_extensions.py
+│   │   ├── items
+│   │   │   └── base_case_items.py
+│   │   ├── middlewares
+│   │   │   ├── base_middlewares.py
+│   │   │   └── proxy.py
+│   │   ├── pipelines
+│   │   │   └── base_pipelines.py
+│   │   ├── protocols
+│   │   │   └── base_protocols.py
+│   │   ├── spiders
+│   │   │   ├── BaseScraper.py
+│   │   │   ├── __init__.py
+│   │   └── utils
+│   │       ├── decorators.py
+│   │       ├── funcs.py
+│   │       ├── logging.py
+│   │       ├── proxies.py
+│   │       └── save_case.py
+│   ├── readme.txt
+│   ├── scrapy.cfg
+│   ├── settings.py
+│   └── spiders
 ├── entrypoint.sh
 └── requirements.txt
 
 ### GitHub Repo
 
+
 └── spiders
-├── init.py
-├── county
-│ ├── datastructures.py
-│ ├── parse.py
-│ └── scraper.py
-├── extensions
-│ ├── MyExtension_300.py
-└── requirements.txt
+    ├── __init__.py
+    ├── county
+    │   ├── datastructures.py
+    │   ├── parse.py
+    │   └── scraper.py
+    ├── extensions
+    │   ├── MyExtension_300.py
+    └── requirements.txt
