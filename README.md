@@ -144,7 +144,7 @@ To set up your development environment, follow these steps:
     ]
 }
 ```
-
+### Configuring the `launch.json` File and CaseScraper Class
     This file starts the main entrance point for the program. The arguments can be changed based on your directive and instructions from Public Digital. This example `launch.json` file is for Lorain County in Ohio denoted by the `--county` and `--state` arguments. The `-y` can be passed in a comma-separated style to include the first year, the starting case number, and the end case number. Use `None` if the end case number is unknown. The `--update_crawl_status` flag will be removed in the future and should not be changed.
 
     All of these arguments will be translated and added as instance variables on the `CaseScraper` class in `/app/case_scraper/spiders/county/scraper.py`. This will be your base 'Spider' used to create your scraper. Do not change the name of this Class.
