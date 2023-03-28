@@ -160,13 +160,13 @@ The easiest and suggested method for writing your scraper is by modifying the `C
 Here are some tools you have access to by the `pd` object. 
 
 
-1. **Login to Docker account with the provided token:`@pd.return_soup` This decorator converts the response to a BeautifulSoup instance with the original response accessable by `soup.response`**
+1. **`@pd.return_soup` This decorator converts the response to a BeautifulSoup instance with the original response accessable by `soup.response`**
 
-2. **Login to Docker account with the provided token:`pd.write_to_file` A handy function for debugging and development. Just pass (`filename`, `content`) and a file will be created or appended in the directory it was called.**
+2. **`pd.write_to_file` A handy function for debugging and development. Just pass (`filename`, `content`) and a file will be created or appended in the directory it was called.**
 
 3. **`pd.info_log` If you need to log information for debugging, you can use this function to do so. Just pass (`your message`).**
 
-`pd.Request` and `pd.FormRequest` This are the base Scrapy request objects.
+4. **`pd.Request` and `pd.FormRequest` This are the base Scrapy request objects.**
 
-`pd.urljoin` This is the base urljoin function.
+5. **`pd.urljoin` This is the base urljoin function.**
 
