@@ -170,3 +170,25 @@ Here are some tools you have access to by the `pd` object.
 
 5. **`pd.urljoin` This is the base urljoin function.**
 
+
+On the `CaseScraper` instance you will have access to the following variables.
+
+```
+self.logger_id
+self.master_crawl_id
+self.county 
+self.crawl_year
+self.years
+self.update_crawl_stats
+self.case_numbers
+self.base_url
+self.username
+self.password
+self.crawl_number
+self.base_case_numbers
+self.case_package_size
+self.parsing_location
+self.threading
+self.info_log
+```
+
