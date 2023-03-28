@@ -121,8 +121,8 @@ To set up your development environment, follow these steps:
 
     By clicking the settings cog, you will get the following `launch.json` file that begins running the script:
 
-    ```
-    {
+```
+{
     "version": "0.1.0",
     "configurations": [
         {
@@ -143,7 +143,7 @@ To set up your development environment, follow these steps:
         }
     ]
 }
-    ```
+```
 
     This file starts the main entrance point for the program. The arguments can be changed based on your directive and instructions from Public Digital. This example `launch.json` file is for Lorain County in Ohio denoted by the `--county` and `--state` arguments. The `-y` can be passed in a comma-separated style to include the first year, the starting case number, and the end case number. Use `None` if the end case number is unknown. The `--update_crawl_status` flag will be removed in the future and should not be changed.
 
