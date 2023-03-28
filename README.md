@@ -171,7 +171,7 @@ Here are some tools you have access to by the `pd` object.
 5. **`pd.urljoin` This is the base urljoin function.**
 
 
-On the `CaseScraper` instance you will have access to the following variables.
+##On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
 
 ```
 self.logger_id
