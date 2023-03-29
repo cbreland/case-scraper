@@ -2,6 +2,15 @@
 
 This repository contains the Docker image and configuration for a Python-based web scraping tool using Scrapy to scrape court cases and associated data from courts all over the country. The project is designed to make it easy for employees and contract workers to quickly write web scrapers for Public Digital.
 
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+- [Development Environment](#development-environment)
+  - [Configuring the launch.json File](#configuring-the-launchjson-file)
+  - [Using the CaseScraper for Scraping, Parsing, and Sending Data](#using-the-casescraper-for-scraping-parsing-and-sending-data)
+
 ## Getting Started
 
 Follow these steps to set up your environment and start developing your scraper:
