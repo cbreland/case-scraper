@@ -12,6 +12,8 @@ This repository contains the Docker image and configuration for a Python-based w
 - [Using the CaseScraper for Scraping, Parsing, and Sending Data](#using-the-casescraper-for-scraping-parsing-and-sending-data)
   - [Useful Utilities](#useful-utilities)
   - [Instance Variables](#on-the-casescraper-instance-you-will-have-access-to-the-following-variables-as-self-or-spider-in-middleware)
+  - [start_requests](#start-requests)
+  - [Yielding to ItemPipeline and CaseItem object](#Yielding-to-itempipeline-and-caseitem-object)
 
 ## Getting Started
 
