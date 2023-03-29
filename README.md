@@ -166,7 +166,7 @@ self.info_log
 
 
 
-  ```
+  ```Markdown
   <details>
 <summary>filename.py</summary>
 '''Python
