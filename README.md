@@ -128,7 +128,7 @@ Here are some tools you have access to by the `pd` object.
 ### On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
 
 1. **Instance Variables**
-```
+```Python
 self.logger_id
 self.master_crawl_id
 self.county 
