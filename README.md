@@ -154,14 +154,16 @@ self.info_log
 ```
 
 ### Start Requests
-The normal `start_requests` method is called. You can start your scraping here as usual. 
+  The normal `start_requests` method is called. You can start your scraping here as usual. 
 
 ### Yielding to ItemPipeline and CaseItem object
-You MUST use Public Digital's `pd.CaseItem` object. 
-Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
-> Note: See `pd.CaseItem` below.
+  > NOTE: You MUST use Public Digital's `pd.CaseItem` object. 
+  
+  Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
+  
+  > Note: See `pd.CaseItem` below.
 
-```Python
+  ```Python
 
 # Example parse function
 
