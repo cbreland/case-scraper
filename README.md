@@ -30,26 +30,26 @@ To get started, you will need the following credentials set as environment varia
 
 1. **Clone the GitHub repo that has Public Digital's sample base scraper and middleware and set path to environment variable:**
 
-    ```
+    ```Bash
     git clone https://github.com/cbreland/spiders.git && cd spiders && export SPIDER_PATH=$(pwd) && cd ..
     ```
 
 2. **Login to Docker account with the provided token:**
 
-    ```
+    ```Bash
     echo $DOCKER_TOKEN | docker login --username pbcasedev --password-stdin
     ```
 
 3. **Pull the Docker image and tag the image under a new name `case-scraper`:**
 
-    ```
+    ```Bash
     docker pull cbreland/case-scraper && \
     docker tag cbreland/case-scraper case-scraper
     ```
 
 5. **Run the Docker image with the provided environment variables and bind/mount the `spiders` directory cloned from GitHub with the internal `spiders` directory:**
 
-    ```
+    ```Bash
     docker run -it \
     -v $SPIDER_PATH:/app/case_scraper/spiders \
     -e DATA_EXCHANGE_API_KEY=$DATA_EXCHANGE_API_KEY \
