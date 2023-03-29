@@ -1,4 +1,4 @@
-c# Public Digital Case Scraper
+# Public Digital Case Scraper
 
 This repository contains the Docker image and configuration for a Python-based web scraping tool using Scrapy to scrape court cases and associated data from courts all over the country. The project is designed to make it easy for employees and contract workers to quickly write web scrapers for Public Digital.
 
