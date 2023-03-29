@@ -204,52 +204,10 @@ self.threading
 self.info_log
 ```
 
-2. **Methods & Functions**
+2. **Start Requests**
+The normal `start_requests` method is called. You can start your scraping here as usual. 
 
-
-```
-CaseData
-├── case: Case (required)
-│   ├── county: str (required)
-│   ├── case_status_date: DateTime (required)
-│   ├── case_title: str (required)
-│   ├── case_number: str (required)
-│   ├── case_type: str (required)
-│   ├── file_date: DateTime (required)
-│   ├── plaintiff: str (required)
-│   ├── case_status: str (required)
-│   ├── amount: float (required)
-    -----------------------------------------------
-│   ├── hearing_date: Optional[str] (optional)
-│   ├── judge: Optional[str] (optional)
-│   └── case_dismiss_date: Optional[str] (optional)
-├── case_party: CaseParty (required)
-│   ├── serve_status: str (required)
-│   ├── is_agreement: bool (required)
-│   ├── is_garnishment: bool (required)
-│   ├── is_bankruptcy_filed: bool (required)
-│   ├── link: Optional[str] (optional)
-│   ├── defendant: Optional[str] (optional)
-│   ├── street: Optional[str] (optional)
-│   ├── state: Optional[str] (optional)
-│   ├── city: Optional[str] (optional)
-│   ├── zip_code: Optional[str] (optional)
-│   ├── attorney: Optional[str] (optional)
-│   ├── garnishment_status: Optional[str] (optional)
-│   ├── garnishment_answer: Optional[str] (optional)
-│   ├── last_pay_date: Optional[str] (optional)
-│   ├── bankruptcy_filed_date: Optional[str] (optional)
-│   ├── employer_info: Optional[str] (optional)
-│   ├── serve_status_date: Optional[str] (optional)
-│   ├── garnishment_date: Optional[str] (optional)
-│   ├── answer_date: Optional[str] (optional)
-│   └── agreement_date: Optional[str] (optional)
-├── case_dockets: List[CaseDocket] (required)
-│   └── CaseDocket
-│       ├── entry: str (required)
-│       ├── date_time: DateTime (required)
-│       ├── unique_id: int (required)
-│       ├── party: str (required)
-│       └── type: Optional[str] (optional)
-└── docket_entries: Optional[List[Dict[str, Union[str, bool]]]] (optional)
-```
+3. **ItemPipeline and CaseItem**
+You MUST use Public Digital's `pd.CaseItem` object. 
+Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
+> Note: See `pd.CaseItem` below.
