@@ -99,7 +99,7 @@ def parse_case_data(item):
             garnishment_status: str
             garnishment_answer: str
             is_agreement: str
-             employer_info: str
+            employer_info: str
             last_pay_date: datestring format '01/01/1900 
             bankruptcy_filed_date: datestring format '01/01/1900 
             is_garnishment: bool
