@@ -99,7 +99,7 @@ To set up your development environment, follow these steps:
 }
 
 ```
-### Configuring the `launch.json` File
+### * Configuring the `launch.json` File
 
 This file starts the main entrance point for the program. The arguments under `"args"` can be changed based on your directive and instructions from Public Digital. This example `launch.json` file is for Lorain County in Ohio denoted by the `--county` and `--state` arguments. The `-y` can be passed in a comma-separated style to include the first year, the starting case number, and the end case number. Use `None` if the end case number is unknown. The `--update_crawl_status` flag will be removed in the future and should not be changed.
 
@@ -125,7 +125,7 @@ Here are some tools you have access to by the `pd` object.
 5. **`pd.urljoin` This is the base urljoin function.**
 
 
-### On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
+### * On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
 
 1. **Instance Variables**
 ```Python
@@ -147,10 +147,10 @@ self.threading
 self.info_log
 ```
 
-### Start Requests
+### * Start Requests
 The normal `start_requests` method is called. You can start your scraping here as usual. 
 
-### Yielding to ItemPipeline and CaseItem object
+### * Yielding to ItemPipeline and CaseItem object
 You MUST use Public Digital's `pd.CaseItem` object. 
 Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
 > Note: See `pd.CaseItem` below.
