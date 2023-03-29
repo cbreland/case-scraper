@@ -157,7 +157,11 @@ Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. I
 
 ```Python
 # Example parse function
-.....
+from public_digital.spiders import BaseScraper as pd
+class CaseScraper(pd.CaseScraperBase):
+
+    ..... # Do Stuff
+    
     @pd.return_soup
     def parse_case(self, soup: pd.BeautifulSoup):
         """CASE DETAILS REQUEST"""
@@ -168,6 +172,9 @@ Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. I
             link=soup.response.url,
             county=self.county
         )
+
+
+# CaseItem that will be used (required)
 
 import scrapy
 
