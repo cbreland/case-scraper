@@ -10,7 +10,7 @@ This repository contains the Docker image and configuration for a Python-based w
 - [Development Environment](#development-environment)
   - [Configuring the launch.json File](#configuring-the-launchjson-file)
 - [Using the CaseScraper for Scraping, Parsing, and Sending Data](#using-the-casescraper-for-scraping-parsing-and-sending-data)
--   - [Useful Utilities](#*-useful-utilities)
+-   - [Useful Utilities](#useful-utilities)
 
 ## Getting Started
 
