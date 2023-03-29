@@ -10,17 +10,17 @@ Follow these steps to set up your environment and start developing your scraper:
 
 To get started, you will need the following credentials as environment variables:
 
-- `DATA_EXCHANGE_API_KEY`: API key for sending scraped data to Public Digital's API endpoints in the Scrapy pipeline.
-- `PROXY_PASSWORD`: Password for Public Digital's Proxy server.
-- `PROXY_USER`: Username for the proxy.
-- `DOCKER_TOKEN`: Token required for logging into the account allowed to pull Docker images from Public Digital's DockerHub repo.
+- `export DATA_EXCHANGE_API_KEY='provided key'`: API key for sending scraped data to Public Digital's API endpoints in the Scrapy pipeline.
+- `export PROXY_PASSWORD='provided password'`: Password for Public Digital's Proxy server.
+- `export PROXY_USER='provided username'`: Username for the proxy.
+- `export DOCKER_TOKEN='provided token'`: Token required for logging into the account allowed to pull Docker images from Public Digital's DockerHub repo.
 
 ### Setup
 
 1. **Login to Docker account with the provided token:**
 
     ```
-    echo "<DOCKER_TOKEN>" | docker login --username pbcasedev --password-stdin
+    echo $DOCKER_TOKEN | docker login --username pbcasedev --password-stdin
     ```
 
 2. **Pull the Docker image and tag the image under a new name `case-scraper`:**
@@ -41,9 +41,9 @@ To get started, you will need the following credentials as environment variables
     ```
     docker run -it \
     -v /path/to/spiders:/app/case_scraper/spiders \
-    -e DATA_EXCHANGE_API_KEY='<DATA_EXCHANGE_API_KEY>' \
-    -e PROXY_PASSWORD='<PROXY_PASSWORD>' \
-    -e PROXY_USER='<PROXY_USER>' \
+    -e DATA_EXCHANGE_API_KEY=$DATA_EXCHANGE_API_KEY \
+    -e PROXY_PASSWORD=$PROXY_PASSWORD \
+    -e PROXY_USER=$PROXY_USER \
     case-scraper \
     /bin/bash
     ```
