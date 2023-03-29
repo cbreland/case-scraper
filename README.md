@@ -1,4 +1,4 @@
-# Public Digital Case Scraper
+c# Public Digital Case Scraper
 
 This repository contains the Docker image and configuration for a Python-based web scraping tool using Scrapy to scrape court cases and associated data from courts all over the country. The project is designed to make it easy for employees and contract workers to quickly write web scrapers for Public Digital.
 
@@ -195,3 +195,50 @@ self.info_log
 
 2. **Methods & Functions**
 
+
+```
+CaseData
+├── case: Case (required)
+│   ├── county: str (required)
+│   ├── case_status_date: DateTime (required)
+│   ├── case_title: str (required)
+│   ├── case_number: str (required)
+│   ├── case_type: str (required)
+│   ├── file_date: DateTime (required)
+│   ├── plaintiff: str (required)
+│   ├── case_status: str (required)
+│   ├── amount: float (required)
+    -----------------------------------------------
+│   ├── hearing_date: Optional[str] (optional)
+│   ├── judge: Optional[str] (optional)
+│   └── case_dismiss_date: Optional[str] (optional)
+├── case_party: CaseParty (required)
+│   ├── serve_status: str (required)
+│   ├── is_agreement: bool (required)
+│   ├── is_garnishment: bool (required)
+│   ├── is_bankruptcy_filed: bool (required)
+│   ├── link: Optional[str] (optional)
+│   ├── defendant: Optional[str] (optional)
+│   ├── street: Optional[str] (optional)
+│   ├── state: Optional[str] (optional)
+│   ├── city: Optional[str] (optional)
+│   ├── zip_code: Optional[str] (optional)
+│   ├── attorney: Optional[str] (optional)
+│   ├── garnishment_status: Optional[str] (optional)
+│   ├── garnishment_answer: Optional[str] (optional)
+│   ├── last_pay_date: Optional[str] (optional)
+│   ├── bankruptcy_filed_date: Optional[str] (optional)
+│   ├── employer_info: Optional[str] (optional)
+│   ├── serve_status_date: Optional[str] (optional)
+│   ├── garnishment_date: Optional[str] (optional)
+│   ├── answer_date: Optional[str] (optional)
+│   └── agreement_date: Optional[str] (optional)
+├── case_dockets: List[CaseDocket] (required)
+│   └── CaseDocket
+│       ├── entry: str (required)
+│       ├── date_time: DateTime (required)
+│       ├── unique_id: int (required)
+│       ├── party: str (required)
+│       └── type: Optional[str] (optional)
+└── docket_entries: Optional[List[Dict[str, Union[str, bool]]]] (optional)
+```
