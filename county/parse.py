@@ -7,8 +7,11 @@ from public_digital.dataclasses.base_dataclasses import (
     CaseDocket, Case, CaseParty, PackedCase
 )
 
+from ...public_digital.items.base_case_items import CaseItem
+from ..county.scraper import CaseScraper
 
-def parse_case_data(item):
+
+def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
     """ This function is for parsing data from the BeautifulSoup Object(s) and creating the 
     required dataclass objects. See steps 1 - 8 below.
     """
