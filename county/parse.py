@@ -9,6 +9,9 @@ from public_digital.dataclasses.base_dataclasses import (
 
 
 def parse_case_data(item):
+    """ This function is for parsing data from the BeautifulSoup Object(s) and creating the 
+    required dataclass objects. See steps 1 - 8 below.
+    """
 
     # ITEM DATA AVAILABLE
     soup = item['soup']
