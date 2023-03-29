@@ -164,7 +164,11 @@ self.info_log
   > Note: See `pd.CaseItem` below.
 
 
-'''Python
+```Markdown
+<details>
+<summary>filename.py</summary>
+  
+  ```
 
 # Example parse function
 
@@ -212,6 +216,10 @@ class CaseItem(scrapy.Item):
         """
         info_log(log_string)
         return repr(log_string)
+
+```
+
+</details>
 
 ```
 
