@@ -8,7 +8,7 @@ Follow these steps to set up your environment and start developing your scraper:
 
 ### Prerequisites
 
-To get started, you will need the following credentials as environment variables:
+To get started, you will need the following credentials set as environment variables:
 
 - `export DATA_EXCHANGE_API_KEY='provided key'`: API key for sending scraped data to Public Digital's API endpoints in the Scrapy pipeline.
 - `export PROXY_PASSWORD='provided password'`: Password for Public Digital's Proxy server.
