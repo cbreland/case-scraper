@@ -59,63 +59,6 @@ To get started, you will need the following credentials set as environment varia
     /bin/bash
     ```
 
-## File Structure
-
-### Docker Image
-```
-── Dockerfile
-├── case_scraper
-│   ├── app-main.py
-│   ├── app.py
-│   ├── public_digital
-│   │   ├── __init__.py
-│   │   ├── data_exchange
-│   │   │   └── public_digital_interface.py
-│   │   ├── dataclasses
-│   │   │   └── base_dataclasses.py
-│   │   ├── extensions
-│   │   │   └── base_extensions.py
-│   │   ├── items
-│   │   │   └── base_case_items.py
-│   │   ├── middlewares
-│   │   │   ├── base_middlewares.py
-│   │   │   └── proxy.py
-│   │   ├── pipelines
-│   │   │   └── base_pipelines.py
-│   │   ├── protocols
-│   │   │   └── base_protocols.py
-│   │   ├── spiders
-│   │   │   ├── BaseScraper.py
-│   │   │   ├── __init__.py
-│   │   └── utils
-│   │       ├── decorators.py
-│   │       ├── funcs.py
-│   │       ├── logging.py
-│   │       ├── proxies.py
-│   │       └── save_case.py
-│   ├── readme.txt
-│   ├── scrapy.cfg
-│   ├── settings.py
-│   └── spiders
-├── entrypoint.sh
-└── requirements.txt
-```
-### GitHub Repo
-
-```
-└── spiders
-    ├── __init__.py
-    ├── county
-    │   ├── datastructures.py
-    │   ├── parse.py
-    │   └── scraper.py
-    ├── extensions
-    │   ├── MyExtension_300.py
-    └── requirements.txt
-    
-```
-
-
 ## Development Environment
 
 To set up your development environment, follow these steps:
@@ -211,3 +154,30 @@ The normal `start_requests` method is called. You can start your scraping here a
 You MUST use Public Digital's `pd.CaseItem` object. 
 Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
 > Note: See `pd.CaseItem` below.
+
+```Python
+import scrapy
+
+from public_digital.utils.logging import info_log
+
+class CaseItem(scrapy.Item):
+
+    soup = scrapy.Field()
+    case_number = scrapy.Field()
+    link = scrapy.Field()
+    county = scrapy.Field()
+
+    def __repr__(self):
+        """only print out 'case_number' after exiting the Pipeline"""
+
+        log_string = f"""
+        ***************
+        ***************
+        *************** CASE SCRAPED: {self['case_number']}
+        ***************
+        ***************
+        ***************
+        """
+        info_log(log_string)
+        return repr(log_string)
+```
