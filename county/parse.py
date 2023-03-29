@@ -7,7 +7,7 @@ from public_digital.dataclasses.base_dataclasses import (
     CaseDocket, Case, CaseParty, PackedCase
 )
 
-from ...public_digital.items.base_case_items import CaseItem
+from public_digital.items.base_case_items import CaseItem
 from ..county.scraper import CaseScraper
 
 
