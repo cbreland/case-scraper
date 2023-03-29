@@ -111,7 +111,7 @@ def parse_case_data(item):
 
         # Parse CaseParty and Case fields from docket
         case_docket_data, case_party_docket_data = parse_docket_fields(
-            docket_dicts, case_dict, plaintiffs
+            docket_dicts, case_dict, plaintiffs, case_number
         )
 
         # -------------------------------------------------------------------------------------
