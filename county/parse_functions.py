@@ -184,10 +184,11 @@ def parse_plaintiffs_and_defendants(soup, link: str) -> Tuple[dict, str]:
     return defendants, names_list_to_string(plaintiffs)
 
 class DocketProcessor:
-    def __init__(self, case_dict, plaintiffs):
+    def __init__(self, case_dict, plaintiffs, case_number):
         # Initialize the DocketProcessor with CaseData containing the docket entries, Case, and CaseParty instances.
         self.case_data = case_dict
         self.case_data['plaintiff'] = plaintiffs
+        self.case_data['case_number'] = case_number
         self.case_party_data = {}
 
     def bankruptcy_test(self, entry: Dict[str, str]) -> None:
@@ -345,7 +346,8 @@ class DocketProcessor:
         self.parse_garn_status(entry)
         self.test_dismissed(entry)
 
-def parse_docket_fields(dockets: List[dict], case_dict: dict, plaintiffs: str) -> Tuple[dict, dict]:
+def parse_docket_fields(
+        dockets: List[dict], case_dict: dict, plaintiffs: str, case_number: str) -> Tuple[dict, dict]:
 
-    processor = DocketProcessor(case_dict, plaintiffs)
+    processor = DocketProcessor(case_dict, plaintiffs, case_number)
     return processor.process_entries(dockets)
