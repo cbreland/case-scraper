@@ -156,8 +156,11 @@ Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. I
 > Note: See `pd.CaseItem` below.
 
 ```Python
+
 # Example parse function
+
 from public_digital.spiders import BaseScraper as pd
+
 class CaseScraper(pd.CaseScraperBase):
 
     ..... # Do Stuff
