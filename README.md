@@ -156,6 +156,19 @@ Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. I
 > Note: See `pd.CaseItem` below.
 
 ```Python
+# Example parse function
+.....
+    @pd.return_soup
+    def parse_case(self, soup: pd.BeautifulSoup):
+        """CASE DETAILS REQUEST"""
+
+        yield pd.CaseItem(
+            case_number=soup.response.meta['case_number'],
+            soup=soup,
+            link=soup.response.url,
+            county=self.county
+        )
+
 import scrapy
 
 from public_digital.utils.logging import info_log
