@@ -10,7 +10,8 @@ This repository contains the Docker image and configuration for a Python-based w
 - [Development Environment](#development-environment)
   - [Configuring the launch.json File](#configuring-the-launchjson-file)
 - [Using the CaseScraper for Scraping, Parsing, and Sending Data](#using-the-casescraper-for-scraping-parsing-and-sending-data)
--   - [Useful Utilities](#useful-utilities)
+  - [Useful Utilities](#useful-utilities)
+  - [Instance Variables](#on-the-casescraper-instance-you-will-have-access-to-the-following-variables-as-self-or-spider-in-middleware)
 
 ## Getting Started
 
@@ -128,7 +129,7 @@ Here are some tools you have access to by the `pd` object.
 5. **`pd.urljoin` This is the base urljoin function.**
 
 
-### On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
+### On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware
 
 1. **Instance Variables**
 ```Python
@@ -150,10 +151,10 @@ self.threading
 self.info_log
 ```
 
-### * Start Requests
+### Start Requests
 The normal `start_requests` method is called. You can start your scraping here as usual. 
 
-### * Yielding to ItemPipeline and CaseItem object
+### Yielding to ItemPipeline and CaseItem object
 You MUST use Public Digital's `pd.CaseItem` object. 
 Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
 > Note: See `pd.CaseItem` below.
