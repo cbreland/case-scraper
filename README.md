@@ -9,7 +9,7 @@ This repository contains the Docker image and configuration for a Python-based w
   - [Setup](#setup)
 - [Development Environment](#development-environment)
   - [Configuring the launch.json File](#configuring-the-launchjson-file)
-  - [Using the CaseScraper for Scraping, Parsing, and Sending Data](#using-the-casescraper-for-scraping-parsing-and-sending-data)
+- [Using the CaseScraper for Scraping, Parsing, and Sending Data](#using-the-casescraper-for-scraping-parsing-and-sending-data)
 
 ## Getting Started
 
@@ -164,7 +164,7 @@ All of these arguments will be translated and added as instance variables on the
 
 In the next section, we will go over how to use this `CaseScraper` to scrape, parse, and send scraped case data to Public Digital's server.
 
-### Using the CaseScraper for Scraping, Parsing, and Sending Data
+## Using the CaseScraper for Scraping, Parsing, and Sending Data
 
 The easiest and suggested method for writing your scraper is by modifying the `CaseScraper` class at `/app/case_scraper/spiders/county/scraper.py`. The file and class should keep the same name and only it's contents be modified. In this file you have access to some tools by the imported `pd` object as `from public_digital.spiders import BaseScraper as pd`. 
 
