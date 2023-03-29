@@ -100,7 +100,7 @@ To set up your development environment, follow these steps:
 }
 
 ```
-### * Configuring the `launch.json` File
+### Configuring the `launch.json` File
 
 This file starts the main entrance point for the program. The arguments under `"args"` can be changed based on your directive and instructions from Public Digital. This example `launch.json` file is for Lorain County in Ohio denoted by the `--county` and `--state` arguments. The `-y` can be passed in a comma-separated style to include the first year, the starting case number, and the end case number. Use `None` if the end case number is unknown. The `--update_crawl_status` flag will be removed in the future and should not be changed.
 
@@ -110,7 +110,7 @@ In the next section, we will go over how to use this `CaseScraper` to scrape, pa
 
 ## Using the CaseScraper for Scraping, Parsing, and Sending Data
 
-### * Useful Utilities
+### Useful Utilities
 
 The easiest and suggested method for writing your scraper is by modifying the `CaseScraper` class at `/app/case_scraper/spiders/county/scraper.py`. The file and class should keep the same name and only it's contents be modified. In this file you have access to some tools by the imported `pd` object as `from public_digital.spiders import BaseScraper as pd`. 
 
@@ -128,7 +128,7 @@ Here are some tools you have access to by the `pd` object.
 5. **`pd.urljoin` This is the base urljoin function.**
 
 
-### * On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
+### On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware.
 
 1. **Instance Variables**
 ```Python
