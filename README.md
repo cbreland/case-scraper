@@ -75,7 +75,7 @@ To set up your development environment, follow these steps:
 
     By clicking the settings cog, you will get the following `launch.json` file that begins running the script:
 
-```
+```Javascript
 {
     "version": "0.1.0",
     "configurations": [
