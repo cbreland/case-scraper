@@ -112,7 +112,11 @@ def parse_case_data(item):
         )
 
         # -------------------------------------------------------------------------------------
-
+        
+        #
+        # STEPS (5 - 8) PACKAGING DATA INTO DATACLASSES
+        #
+        
         #
         # (STEP 5)
         #
