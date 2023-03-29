@@ -164,12 +164,8 @@ self.info_log
   > Note: See `pd.CaseItem` below.
 
 
-
-
-  ```Markdown
-  <details>
-<summary>filename.py</summary>
 '''Python
+
 # Example parse function
 
 from public_digital.spiders import BaseScraper as pd
@@ -216,7 +212,6 @@ class CaseItem(scrapy.Item):
         """
         info_log(log_string)
         return repr(log_string)
-        '''
-        <details>
+
 ```
 
