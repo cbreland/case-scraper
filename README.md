@@ -1,6 +1,13 @@
+Your README.md looks well-structured and comprehensive. I went through it and made a few minor changes for clarity and grammar. Here's the updated version:
+
+```markdown
 # Public Digital Case Scraper
 
-This repository contains the Docker image and configuration for a Python-based web scraping tool using Scrapy to scrape court cases and associated data from courts all over the country. The project is designed to make it easy for employees and contract workers to quickly write web scrapers for Public Digital.
+Welcome to the Public Digital Case Scraper repository! This repository serves as a hub for our Python-based web scraping tool, which utilizes the Scrapy framework. Our main goal is to efficiently scrape court cases and related data from courts across the nation.
+
+This repository provides an example file structure specifically designed to bind/mount to a centralized Docker Image. This setup ensures a consistent environment, making it easier for employees and contract workers to develop and maintain web scrapers for Public Digital.
+
+By leveraging the power and flexibility of our scraping tool, we aim to streamline the extraction of valuable legal information so attorneys can better inform the public and subsequently help those most in need.
 
 ## Table of Contents
 
@@ -56,7 +63,7 @@ To get started, you will need the following credentials set as environment varia
     docker tag cbreland/case-scraper case-scraper
     ```
 
-5. **Run the Docker image with the provided environment variables and bind/mount the `spiders` directory cloned from GitHub with the internal `spiders` directory:**
+4. **Run the Docker image with the provided environment variables and bind/mount the `spiders` directory cloned from GitHub with the internal `spiders` directory:**
 
     ```Bash
     docker run -it \
@@ -84,7 +91,8 @@ To set up your development environment, follow these steps:
 
     By clicking the settings cog, you will get the following `launch.json` file that begins running the script:
 
-```Javascript
+```javascript
+
 {
     "version": "0.1.0",
     "configurations": [
@@ -110,9 +118,9 @@ To set up your development environment, follow these steps:
 ```
 ### Configuring the `launch.json` File
 
-  This file starts the main entrance point for the program. The arguments under `"args"` can be changed based on your directive and instructions from     Public Digital. This example `launch.json` file is for Lorain County in Ohio denoted by the `--county` and `--state` arguments. The `-y` can be passed   in a comma-separated style to include the first year, the starting case number, and the end case number. Use `None` if the end case number is           unknown. The `--update_crawl_status` flag will be removed in the future and should not be changed.
+  This file starts the main entrance point for the program. The arguments under `"args"` can be changed based on your directive and instructions from Public Digital. This example `launch.json` file is for Lorain County in Ohio, denoted by the `--county` and `--state` arguments. The `-y` can be passed in a comma-separated style to include the first year, the starting case number, and the end case number. Use `None` if the end case number is unknown. The `--update_crawl_status` flag will be removed in the future and should not be changed.
 
-  All of these arguments will be translated and added as instance variables on the `CaseScraper` class in `/app/case_scraper/spiders/county/scraper.py`.   This will be your base 'Spider' used to create your scraper. Do not change the name of this Class.
+  All of these arguments will be translated and added as instance variables on the `CaseScraper` class in `/app/case_scraper/spiders/county/scraper.py`. This will be your base 'Spider' used to create your scraper. Do not change the name of this Class.
 
   In the next section, we will go over how to use this `CaseScraper` to scrape, parse, and send scraped case data to Public Digital's server.
 
@@ -120,23 +128,22 @@ To set up your development environment, follow these steps:
 
 ### Useful Utilities
 
-  The easiest and suggested method for writing your scraper is by modifying the `CaseScraper` class at `/app/case_scraper/spiders/county/scraper.py`. The file and class should keep the same name and only it's contents be modified. In this file you have access to some tools by the imported `pd` object as `from public_digital.spiders import BaseScraper as pd`. 
+  The easiest and suggested method for writing your scraper is by modifying the `CaseScraper` class at `/app/case_scraper/spiders/county/scraper.py`. The file and class should keep the same name and only its contents be modified. In this file, you have access to some tools by the imported `pd` object as `from public_digital.spiders import BaseScraper as pd`. 
 
 Here are some tools you have access to by the `pd` object. 
 
+1. **`@pd.return_soup` This decorator converts the response to a BeautifulSoup instance with the original response accessible by `soup.response`**
 
-1. **`@pd.return_soup` This decorator converts the response to a BeautifulSoup instance with the original response accessable by `soup.response`**
+2. **`pd.write_to_file()` A handy function for debugging and development. Just pass (`filename`, `content`) and a file will be created or appended in the directory it was called.**
 
-2. **`pd.write_to_file` A handy function for debugging and development. Just pass (`filename`, `content`) and a file will be created or appended in the directory it was called.**
+3. **`pd.info_log()` If you need to log information for debugging, you can use this function to do so. Just pass (`your message`).**
 
-3. **`pd.info_log` If you need to log information for debugging, you can use this function to do so. Just pass (`your message`).**
+4. **`pd.Request` and `pd.FormRequest` These are the base Scrapy request objects.**
 
-4. **`pd.Request` and `pd.FormRequest` This are the base Scrapy request objects.**
-
-5. **`pd.urljoin` This is the base urljoin function.**
+5. **`pd.urljoin()` This is the base urljoin function.**
 
 
-### On the `CaseScraper` instance you will have access to the following variables as `self` or `spider` in middleware
+### On the `CaseScraper` instance, you will have access to the following variables as `self` or `spider` in middleware
 
 1. **Instance Variables**
 ```Python
@@ -164,10 +171,9 @@ self.info_log
 ### Yielding to ItemPipeline and CaseItem object
   > NOTE: You MUST use Public Digital's `pd.CaseItem` object. 
   
-  Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county` which can be received using `self.county`.
+  Our objective is to keep the `CaseScraper` and parsing of the `HTML` separate. In order to do this, you can add a list of `soup` objects to the `pd.CaseItem` object under the `soup` field. You will also need the `link` or URL for the case, `case_number`, the case number for the case, and `county`, which can be received using `self.county`.
   
   > Note: See `pd.CaseItem` below.
-
 
 ```Python
 
@@ -223,7 +229,7 @@ class CaseItem(scrapy.Item):
 ```
 ### Parsing HTML
 
-   When you are ready to start parsing the HTML that was passed in the `CaseItem` object, you can use the `parse_case_data` function below. This will be in the `parse.py`. This file and function name can't be changed. Arguments that are passed are `(CaseItem, CaseScraper)` so you have full access to the instance variables. Please not the following.
+   When you are ready to start parsing the HTML that was passed in the `CaseItem` object, you can use the `parse_case_data` function below. This will be in the `parse.py`. This file and function name can't be changed. Arguments that are passed are `(CaseItem, CaseScraper)` so you have full access to the instance variables. Please note the following..
    1. **Data Structure:** As you will notice below. This project offers `@dataclass` objects to help serialize the data going to Public Digital's servers in order for it to be successfully accepted by the endpoints.
    2. **Submitting Scraped Data:** After you have successfully parsed and organized the data into the `@dataclass` objects, a final `@dataclass` object will package everything. This object is called `PackedCase`. This should be returned by the `parse_case_data` function as in the example below. This is all you will have to do in order to submit the scraped case to Public Digital's endpoint.
 
@@ -413,20 +419,24 @@ class CaseItem(scrapy.Item):
 1. **Middlewares:**
     If you need to add additional middlewares they can be automatically added to the scraper.
     ```
+    
     File Structure ...
     ├── app
         ├── case_scraper
         │   └── spiders
         │       └── middlewares
         │           └── MyMiddleware__500.py  
+        
     ```
     Notice the file name `MyMiddleware__500.py`. This naming convention will need to be used especially the `__500.py`. Your class name should be the same as your file name before the `__` such as `MyMiddleware`. This will conver to this setting. the `__500` will indicate the sequence.
     ```Python
+    
     SETTINGS = {
         "DOWNLOADER_MIDDLEWARES": {
             'app.case_scraper.spiders.middlewares.MyMiddleware__500.MyMiddleware': 500
         }
     }
+    
     ```
     
     See example below.
@@ -456,20 +466,24 @@ class CaseItem(scrapy.Item):
 2. **Extensions:**
     If you need to add additional extensions they can be automatically added to the scraper.
     ```
+    
     File Structure ...
     ├── app
         ├── case_scraper
         │   └── spiders
         │       └── extensions
         │           └── MyExtension.py  
+        
     ```
     Notice the file name `MyExtension__500.py`. This naming convention will need to be used especially the `__500.py`. Your class name should be the same as your file name before the `__` such as `MyExtension`. This will conver to this setting. the `__500` will indicate the sequence.
     ```Python
+    
     SETTINGS = {
         "EXTENSIONS": {
             'app.case_scraper.spiders.middlewares.MyExtension__500.MyExtension': 500
         }
     }
+    
     ```
     
     See example below.
