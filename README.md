@@ -507,4 +507,23 @@ class CaseItem(scrapy.Item):
             │       └── requirements.txt
 
     ```
+    
+    
+    ## Challenges
+    
+1. **Dynamic content:** Websites that load content dynamically using JavaScript can be challenging to scrape, as the data may not be present in the initial HTML source. Scraping such sites often requires using tools like Selenium or Scrapy with Splash to render and interact with the dynamic content.
+
+    ```If you need `Scrapy Splash` we can add this to the docker image.``
+
+2. **Inconsistent HTML structure:** Websites with inconsistent or poorly structured HTML can make it difficult to reliably extract structured data. This may require additional logic or more complex parsing techniques to accurately locate and extract the desired information.
+
+3. **Rate limiting and IP blocking:** Web servers may implement rate limiting or IP blocking to prevent automated scraping. This requires implementing techniques like using proxies, rotating user agents, and implementing delays to avoid detection and continue scraping.
+
+    ```Our Docker image already comes with a rotating proxy. This can be changed any time by calling `self.change_proxy()'.```
+
+4. **Pagination and infinite scrolling:** Websites with paginated content or infinite scrolling can pose challenges in terms of locating and following the correct links or scrolling actions to load additional data, while also avoiding duplicate content.
+
+5. **Captchas and anti-bot measures:** Some websites employ Captchas or other anti-bot measures to prevent automated scraping. Bypassing these measures may require using third-party services, OCR tools, or other techniques, which can increase the complexity of the scraping process.
+
+6. **Data extraction from non-text sources:** In cases where structured data is embedded within non-text sources like images, PDFs, or other media formats, additional tools or techniques such as OCR or PDF parsing libraries may be required to extract the information.
 
