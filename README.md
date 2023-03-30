@@ -22,7 +22,8 @@ By leveraging the power and flexibility of our scraping tool, we aim to streamli
   - [Additional Utilities](#additional-utilities)
     - Middlewares
     - Extensions
-    - Additional Python Packages   
+    - Additional Python Packages 
+  - [Challenges](#challenges)  
 
 ## Getting Started
 
@@ -509,11 +510,11 @@ class CaseItem(scrapy.Item):
     ```
     
     
-    ## Challenges
+## Challenges
     
 1. **Dynamic content:** Websites that load content dynamically using JavaScript can be challenging to scrape, as the data may not be present in the initial HTML source. Scraping such sites often requires using tools like Selenium or Scrapy with Splash to render and interact with the dynamic content.
 
-    ```If you need `Scrapy Splash` we can add this to the docker image.``
+    ```If you need `Scrapy Splash` we can add this to the docker image.```
 
 2. **Inconsistent HTML structure:** Websites with inconsistent or poorly structured HTML can make it difficult to reliably extract structured data. This may require additional logic or more complex parsing techniques to accurately locate and extract the desired information.
 
