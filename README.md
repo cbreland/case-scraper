@@ -13,7 +13,12 @@ This repository contains the Docker image and configuration for a Python-based w
   - [Useful Utilities](#useful-utilities)
   - [Instance Variables](#on-the-casescraper-instance-you-will-have-access-to-the-following-variables-as-self-or-spider-in-middleware)
   - [start_requests](#start-requests)
-  - [Yielding to ItemPipeline and CaseItem object](#Yielding-to-itempipeline-and-caseitem-object)
+  - [Yielding to ItemPipeline and CaseItem object](#yielding-to-itempipeline-and-caseitem-object)
+  - [Parsing HTML](#parsing-html)
+  - [Additional Utilities](#additional-utilities)
+    - Middlewares
+    - Extensions
+    - Additional Python Packages   
 
 ## Getting Started
 
@@ -216,5 +221,279 @@ class CaseItem(scrapy.Item):
         return repr(log_string)
 
 ```
+### Parsing HTML
 
+   When you are ready to start parsing the HTML that was passed in the `CaseItem` object, you can use the `parse_case_data` function below. This will be in the `parse.py`. This file and function name can't be changed. Arguments that are passed are `(CaseItem, CaseScraper)` so you have full access to the instance variables. Please not the following.
+   1. **Data Structure:** As you will notice below. This project offers `@dataclass` objects to help serialize the data going to Public Digital's servers in order for it to be successfully accepted by the endpoints.
+   2. **Submitting Scraped Data:** After you have successfully parsed and organized the data into the `@dataclass` objects, a final `@dataclass` object will package everything. This object is called `PackedCase`. This should be returned by the `parse_case_data` function as in the example below. This is all you will have to do in order to submit the scraped case to Public Digital's endpoint.
+
+> Example: This is an example `parse_case_data` function. See `/app/case_scraper/spiders/parse_utils` for example functions and classes used for parsing.
+   ```Python
+    # --------------------------------------------------------------------
+    # Example parse.py file @ /app/case_scraper/spiders/county/parse.py
+    #├── app
+    #    ├── case_scraper
+    #    │   └── spiders
+    #    │       └── county
+    #    │           └── parse.py  
+    # --------------------------------------------------------------------
+   from ..parse_utils.parse_functions import (
+       parse_docket_entries, parse_case_related_data,
+       parse_plaintiffs_and_defendants, parse_docket_fields
+   )
+   
+   from public_digital.dataclasses.base_dataclasses import (
+       CaseDocket, Case, CaseParty, PackedCase
+   )
+   
+   from public_digital.items.base_case_items import CaseItem
+   from ..county.scraper import CaseScraper
+   
+   
+   def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
+       """ This function is for parsing data from the BeautifulSoup Object(s) and creating the 
+       required dataclass objects. See steps 1 - 8 below.
+       """
+   
+       # ITEM DATA AVAILABLE
+       soup = item['soup']
+       case_number = item['case_number']
+       link = item['link']
+       county = item['county']
+       
+       """ -------------------------------------------------------------------------------------
+       
+       #
+       # (STEP 1) THE FOLLOWING STEPS ARE BASED ON GETTING CASE AND PARTY DATA FROM DOCKET ENTRIES
+       #
+       # Create a dictionary of initial case data as key, value pairs
+       # In the following data structure
+       
+       case_dict
+           file_date: datestring format '01/01/1900 
+           case_status_date: datestring 'start with filed_date'
+           case_title: str
+           case_number: str
+           county: str
+           judge: str
+           case_type: str
+       """
+       case_dict = parse_case_related_data(soup, county)
+       
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # (STEP 2)
+       #
+       # Create a list of dictionaries containing the docket entry data as key, value pairs
+       # In the following data structure
+       
+       docket_dicts
+           entry: str
+           date_time: datestring format '01/01/1900 
+           unique_id: int
+       """
+       docket_dicts = parse_docket_entries(soup)
+   
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # (STEP 3)
+       #
+       # Create a list of dictionaries with defendant data as key, value pairs
+       # In the following data structure
+      
+       defendant_dicts
+           defendant: str (defendant name)
+           total_address: str (combined address)
+           street: str
+           city: str
+           state: str
+           zip_code: str
+           attorney: str (optional if not available)
+       plaintiffs
+           'John Doe 1, John Doe 2, and Jane Doe'
+       """
+       defendant_dicts, plaintiffs = parse_plaintiffs_and_defendants(soup, link)
+   
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # (STEP 4)
+       #
+       # Create a dictionary with defendant and plaintiff data as key, value pairs
+       # from parsing the docket entries
+       #
+       # Return a tuple with each dictionary included
+       # In the following data structure
+      
+       case_docket_data: dict
+           hearing_date: datestring format '01/01/1900 
+           case_status: str
+           amount: str
+           case_dismiss_date: datestring format '01/01/1900 
+       case_party_docket_data: dict
+           link: str = None
+           serve_status: str
+           serve_status_date: datestring format '01/01/1900 
+           garnishment_status: str
+           garnishment_answer: str
+           is_agreement: str
+           employer_info: str
+           last_pay_date: datestring format '01/01/1900 
+           bankruptcy_filed_date: datestring format '01/01/1900 
+           is_garnishment: bool
+           garnishment_date: datestring format '01/01/1900 
+           answer_date: datestring format '01/01/1900 
+           agreement_date: datestring format '01/01/1900 
+           is_bankruptcy_filed: bool
+       """
+       case_docket_data, case_party_docket_data = parse_docket_fields(
+           docket_dicts, case_dict, plaintiffs, case_number
+       )
+   
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # STEPS (5 - 8) PACKAGING DATA INTO DATACLASSES
+       #
+       """
+       
+       """
+       #
+       # (STEP 5)
+       #
+       # Create a list of CaseDocket objects
+       """
+       dockets = [
+           CaseDocket(**docket_entry)
+           for docket_entry in docket_dicts
+       ]
+   
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # (STEP 6)
+       #
+       # Create a Case object
+       """
+       case = Case(**case_docket_data)
+       
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # (STEP 7)
+       #
+       # Create a list of CaseParty objects with dictionaries that were created
+       # Also add the list of CaseDockets as a dictionary.
+       """
+       case_parties = [
+           CaseParty(
+               **case_party_docket_data,
+               **defendant_dict,
+               docket_entries=dockets
+           )
+           for defendant_dict in defendant_dicts
+       ]
+   
+       """ -------------------------------------------------------------------------------------
+   
+       #
+       # (STEP 8)
+       #
+       # Create BaseCasePacked object with the list of Case and list of CaseParty objects
+       """
+       return PackedCase(case, case_parties)
+
+   ```
+   
+
+### Additional Utilities
+
+1. **Middlewares:**
+    If you need to add additional middlewares they can be automatically added to the scraper.
+    ```
+    File Structure ...
+    ├── app
+        ├── case_scraper
+        │   └── spiders
+        │       └── middlewares
+        │           └── MyMiddleware__500.py  
+    ```
+    Notice the file name `MyMiddleware__500.py`. This naming convention will need to be used especially the `__500.py`. Your class name should be the same as your file name before the `__` such as `MyMiddleware`. This will conver to this setting. the `__500` will indicate the sequence.
+    ```Python
+    SETTINGS = {
+        "DOWNLOADER_MIDDLEWARES": {
+            'app.case_scraper.spiders.middlewares.MyMiddleware__500.MyMiddleware': 500
+        }
+    }
+    ```
+    
+    See example below.
+    ```Python
+    
+    # Example Middleware @ (this repo) /app/case_scraper/spiders/middlewares/MyMiddleware__500.py
+    
+    from scrapy import signals
+
+    # useful for handling different item types with a single interface
+    from itemadapter import is_item, ItemAdapter
+
+
+    class MyMiddleware:
+        # Not all methods need to be defined. If a method is not defined,
+        # scrapy acts as if the spider middleware does not modify the
+        # passed objects.
+
+        @classmethod
+        def from_crawler(cls, crawler):
+            # This method is used by Scrapy to create your spiders.
+            s = cls()
+            crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
+          return s
+    
+    ```
+2. **Extensions:**
+    If you need to add additional extensions they can be automatically added to the scraper.
+    ```
+    File Structure ...
+    ├── app
+        ├── case_scraper
+        │   └── spiders
+        │       └── extensions
+        │           └── MyExtension.py  
+    ```
+    Notice the file name `MyExtension__500.py`. This naming convention will need to be used especially the `__500.py`. Your class name should be the same as your file name before the `__` such as `MyExtension`. This will conver to this setting. the `__500` will indicate the sequence.
+    ```Python
+    SETTINGS = {
+        "EXTENSIONS": {
+            'app.case_scraper.spiders.middlewares.MyExtension__500.MyExtension': 500
+        }
+    }
+    ```
+    
+    See example below.
+    ```Python
+    
+    # Example Middleware @ (this repo) /app/case_scraper/spiders/extensions/MyExtension__500.py
+    
+    class MyExtension:
+      pass
+    
+    ```
+    
+ 3. **Python Packages:**
+    If you need additional python packages, they can be installed by adding them to the `requirements.txt` file. When the docker image is run, the packages will automatically be installed. Having them in the `requirements.txt` file will help Public Digital know they are required for your code to execute properly. 
+    > `requirements.txt location`
+    ```Bash
+        File Structure ...
+        
+        # /app/case_scraper/spiders/requirements.txt
+        
+        ├── app
+            ├── case_scraper
+            │   └── spiders
+            │       └── requirements.txt
+
+    ```
 
