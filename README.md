@@ -1,6 +1,3 @@
-Your README.md looks well-structured and comprehensive. I went through it and made a few minor changes for clarity and grammar. Here's the updated version:
-
-```markdown
 # Public Digital Case Scraper
 
 Welcome to the Public Digital Case Scraper repository! This repository serves as a hub for our Python-based web scraping tool, which utilizes the Scrapy framework. Our main goal is to efficiently scrape court cases and related data from courts across the nation.
