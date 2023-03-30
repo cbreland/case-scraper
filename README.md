@@ -185,7 +185,9 @@ class CaseScraper(pd.CaseScraperBase):
             county=self.county
         )
 
+```
 
+```Python
 # CaseItem that will be used (required)
 
 import scrapy
