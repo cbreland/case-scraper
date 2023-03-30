@@ -18,7 +18,7 @@ By leveraging the power and flexibility of our scraping tool, we aim to streamli
   - [Instance Variables](#on-the-casescraper-instance-you-will-have-access-to-the-following-variables-as-self-or-spider-in-middleware)
   - [start_requests](#start-requests)
   - [Yielding to ItemPipeline and CaseItem object](#yielding-to-itempipeline-and-caseitem-object)
-  - [Parsing HTML](#parsing-html)
+  - [Parsing HTML & Data Structures](#parsing-html-&-data-structures)
   - [Additional Utilities](#additional-utilities)
     - Middlewares
     - Extensions
@@ -224,7 +224,7 @@ class CaseItem(scrapy.Item):
         return repr(log_string)
 
 ```
-### Parsing HTML
+### Parsing HTML & Data Structures
 
    When you are ready to start parsing the HTML that was passed in the `CaseItem` object, you can use the `parse_case_data` function below. This will be in the `parse.py`. This file and function name can't be changed. Arguments that are passed are `(CaseItem, CaseScraper)` so you have full access to the instance variables. Please note the following..
    1. **Data Structure:** As you will notice below. This project offers `@dataclass` objects to help serialize the data going to Public Digital's servers in order for it to be successfully accepted by the endpoints.
