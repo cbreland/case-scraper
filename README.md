@@ -469,7 +469,7 @@ class CaseItem(scrapy.Item):
         ├── case_scraper
         │   └── spiders
         │       └── extensions
-        │           └── MyExtension.py  
+        │           └── MyExtension__500.py  
         
     ```
     Notice the file name `MyExtension__500.py`. This naming convention will need to be used especially the `__500.py`. Your class name should be the same as your file name before the `__` such as `MyExtension`. This will conver to this setting. the `__500` will indicate the sequence.
