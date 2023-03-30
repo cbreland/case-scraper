@@ -166,7 +166,7 @@ self.info_log
 
 ```Python
 
-# Example parse function
+# Example parse function @ (this repo) /app/case_scraper/spiders/county/scraper.py
 
 from public_digital.spiders import BaseScraper as pd
 
@@ -188,7 +188,7 @@ class CaseScraper(pd.CaseScraperBase):
 ```
 
 ```Python
-# CaseItem that will be used (required)
+# CaseItem that will be used @ (docker image) /app/case_scraper/public_digital/items/base_case_items.py
 
 import scrapy
 
