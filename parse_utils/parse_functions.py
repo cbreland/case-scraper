@@ -93,7 +93,7 @@ def parse_case_related_data(soup, county, case_number_int_repr=None):
             'judge': soup.select('#lblJudgeName')[0].get_text(strip=True),
             'case_type': case_type,
         }
-        if int_case_number:
+        if case_number_int_repr:
             case_data['case_number_int_repr'] = case_number_int_repr
             
         return case_data
