@@ -26,7 +26,7 @@ class CaseScraper(pd.CaseScraperBase):
                 pd.urljoin(self.base_url,
                 f'Docket.aspx?CaseID={current_case}'),
                 callback=self.case_details,
-                meta={'case_number': current_case}
+                meta={'case_number_int_repr': current_case}
             )
 
     @pd.return_soup
@@ -34,7 +34,7 @@ class CaseScraper(pd.CaseScraperBase):
         """CASE DETAILS REQUEST"""
 
         yield pd.CaseItem(
-            case_number=soup.response.meta['case_number'],
+            case_number=soup.response.meta['case_number_int_repr'],
             soup=soup,
             link=soup.response.url,
             county=self.county
