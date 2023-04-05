@@ -11,11 +11,11 @@ from .datastructures import (
 )
 
 class DocketProcessor:
-    def __init__(self, case_dict, plaintiffs, case_number):
+    def __init__(self, case_dict, plaintiffs):
         # Initialize the DocketProcessor with CaseData containing the docket entries, Case, and CaseParty instances.
         self.case_data = case_dict
         self.case_data['plaintiff'] = plaintiffs
-        self.case_data['case_number'] = case_number
+     
         self.case_party_data = {}
 
     def bankruptcy_test(self, entry: Dict[str, str]) -> None:
