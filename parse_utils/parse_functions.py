@@ -75,7 +75,7 @@ def parse_docket_entries(soup) -> List[Dict[str, Optional[str]]]:
     return docket_entries
 
 
-def parse_case_related_data(soup, county):
+def parse_case_related_data(soup, county, case_number_int_repr=None):
     case_number = soup.select('#lblCaseNumber')[0].text
     if "CV" in case_number:
         case_type = ''
@@ -83,7 +83,7 @@ def parse_case_related_data(soup, county):
             case_type = COURT_CASE_TYPES_MAP[soup.select('#lblDescription')[0].get_text(strip=True).lower()]
         except:
             write_to_file('case_types.txt', soup.select('#lblDescription')[0].get_text(strip=True)+'\n')
-        return {
+        case_data = {
             'file_date': soup.select('#lblDateFiled')[0].get_text(strip=True),
             'case_status_date': soup.select('#lblDateFiled')[0].get_text(strip=True),
             'case_title': soup.select('#lblCaption')[0].get_text(strip=True),
@@ -93,6 +93,10 @@ def parse_case_related_data(soup, county):
             'judge': soup.select('#lblJudgeName')[0].get_text(strip=True),
             'case_type': case_type,
         }
+        if int_case_number:
+            case_data['case_number_int_repr'] = case_number_int_repr
+            
+        return case_data
     raise IgnoreRequest("Not a Civil Case")
     
 def parse_plaintiffs_and_defendants(soup, link: str) -> Tuple[dict, str]:
