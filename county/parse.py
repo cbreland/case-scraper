@@ -33,13 +33,14 @@ def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
     case_dict
         file_date: datestring format '01/01/1900 
         case_status_date: datestring 'start with filed_date'
+        case_number_int_repr: int # integer case number (Only if using case number enumeration for retrieval of cases)
         case_title: str
         case_number: str
         county: str
         judge: str
         case_type: str
     """
-    case_dict = parse_case_related_data(soup, county)
+    case_dict = parse_case_related_data(soup, county, case_number)
     
     """ -------------------------------------------------------------------------------------
 
