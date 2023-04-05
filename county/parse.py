@@ -111,7 +111,7 @@ def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
         is_bankruptcy_filed: bool
     """
     case_docket_data, case_party_docket_data = parse_docket_fields(
-        docket_dicts, case_dict, plaintiffs, case_number
+        docket_dicts, case_dict, plaintiffs
     )
 
     """ -------------------------------------------------------------------------------------
