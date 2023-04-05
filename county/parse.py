@@ -18,7 +18,7 @@ def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
 
     # ITEM DATA AVAILABLE
     soup = item['soup']
-    case_number_int_repr = item['case_number_int_repr']
+    case_number_int_repr = item['case_number']
     link = item['link']
     county = item['county']
     
