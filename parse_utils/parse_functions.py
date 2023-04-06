@@ -19,7 +19,7 @@ def _validate_type(docket_type: str) -> bool:
 
 def _validate_date(date_str: str) -> bool:
     """
-    Validate if the given date string is in the format 'MM/DD/YYYY'.
+    Validate if the given date string is in the format 'MM/DD/YYYY'. 
     :param date_str: The date string to be validated.
     :return: True if the date string is valid, False otherwise.
     """
@@ -77,6 +77,7 @@ def parse_docket_entries(soup) -> List[Dict[str, Optional[str]]]:
 
 def parse_case_related_data(soup, county, case_number_int_repr=None):
     case_number = soup.select('#lblCaseNumber')[0].text
+    print(case_number)
     if "CV" in case_number:
         case_type = ''
         try:
@@ -174,7 +175,7 @@ def parse_plaintiffs_and_defendants(soup, link: str) -> Tuple[dict, str]:
 
 
 def parse_docket_fields(
-        dockets: List[dict], case_dict: dict, plaintiffs: str, case_number: str) -> Tuple[dict, dict]:
+        dockets: List[dict], case_dict: dict, plaintiffs: str) -> Tuple[dict, dict]:
 
-    processor = DocketProcessor(case_dict, plaintiffs, case_number)
+    processor = DocketProcessor(case_dict, plaintiffs)
     return processor.process_entries(dockets)
