@@ -89,6 +89,7 @@ def parse_case_related_data(soup, county, case_number_int_repr=None):
             'case_status_date': soup.select('#lblDateFiled')[0].get_text(strip=True),
             'case_title': soup.select('#lblCaption')[0].get_text(strip=True),
             'plaintiff': '',
+            'court_type': 'Municipal',
             'case_number': case_number,
             'county': county,
             'judge': soup.select('#lblJudgeName')[0].get_text(strip=True),
