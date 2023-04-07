@@ -38,6 +38,7 @@ def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
         case_number: str
         county: str
         judge: str
+        court_type: str 
         case_type: str
     """
     case_dict = parse_case_related_data(soup, county, case_number_int_repr)
@@ -91,7 +92,7 @@ def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
    
     case_docket_data: dict
         hearing_date: datestring format '01/01/1900 
-        case_status: str
+        case_status: str ('Appealed','Closed', 'Dismissed', 'Disposed', 'Filed - Not Opened', 'Open', 'Open (Status changed in error)', 'Remanded', 'Reopened')
         amount: str
         case_dismiss_date: datestring format '01/01/1900 
     case_party_docket_data: dict
