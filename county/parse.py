@@ -3,6 +3,8 @@ from ..parse_utils.parse_functions import (
     parse_plaintiffs_and_defendants, parse_docket_fields
 )
 
+from ..parse_utils.melissa_address_search import search_personator
+
 from public_digital.dataclasses.base_dataclasses import (
     CaseDocket, Case, CaseParty, PackedCase
 )
@@ -15,6 +17,31 @@ def parse_case_data(item: CaseItem, spider: CaseScraper) -> PackedCase:
     """ This function is for parsing data from the BeautifulSoup Object(s) and creating the 
     required dataclass objects. See steps 1 - 8 below.
     """
+
+
+    # address = personator_search(name: str, state: str, county:str, zip_codes: list = None)
+    """ -------------------------------------------------------------------------------------
+    *****
+    *****
+    ***** NEW MELISSA PERSONATOR SEARCH 
+    ***** personator_search(name: str, state: str, county:str, zip_codes: list = None)
+    *****
+
+    ARGS:
+    name: str -> Name of the Defendant (ie. 'John Doe')
+    state: str -> State of the defendant (ie. 'TN)
+    county: str -> County of the defendant (ie. 'Washington')
+    zip_codes: list -> List of zip codes to check OPTIONAL (ie. ['10000', ['10001'])
+
+    RETURNS (dict):
+    
+    {'name': 'John Doe',
+     'street': '100 Main st.',
+     'county': 'County',
+     'state': 'AL',
+     'zip_code': '10000'}
+    """
+    
 
     # ITEM DATA AVAILABLE
     soup = item['soup']
